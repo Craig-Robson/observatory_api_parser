@@ -30,7 +30,10 @@ def read_request_response(sensor_text):
 
         elif line[0] != '#':  # this is the actual data for the sensor
 
-            data.append(line[2:])
+            seconds = line.split(',')[0]
+            value = datetime.datetime.fromtimestamp(int(seconds))
+            date_time = value.strftime('%Y-%m-%d %H:%M:%S')
+            data.append(line+','+date_time)
 
         else:
             if 'sensor.family:' in line:
